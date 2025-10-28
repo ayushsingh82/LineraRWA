@@ -1,8 +1,16 @@
+pub mod contract;
+pub mod service;
+pub mod state;
+
+pub use contract::RWAContract;
+pub use service::RWAService;
+pub use state::RWAState;
+
 use async_trait::async_trait;
 use linera_sdk::base::{Amount, ApplicationId, ChainId, Destination, MessageId, Owner, WithCallbacks};
 use linera_sdk::service::SystemContext;
 
-#[derive(Clone, Copy, Debug, serde::Deserialize, serde::Serialize)]
+#[derive(Clone, Copy, Debug, serde::Deserialize, serde::Serialize, PartialEq, Eq, Hash)]
 pub struct RWAId(pub u64);
 
 #[derive(Debug, serde::Deserialize, serde::Serialize)]
