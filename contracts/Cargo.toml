@@ -1,1 +1,21 @@
-// here 
+[package]
+name = "rwa-tokenization"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "rwa_tokenization"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "service"
+path = "src/service.rs"
+
+[[bin]]
+name = "contract"
+path = "src/contract.rs"
+
+[dependencies]
+async-trait = "0.1"
+linera-sdk = "0.1"
