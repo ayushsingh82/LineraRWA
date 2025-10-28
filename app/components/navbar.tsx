@@ -21,10 +21,10 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="#features" className="text-foreground hover:text-primary transition">
+            <Link href="/tokenize" className="text-foreground hover:text-primary transition">
               Tokenization
             </Link>
-            <Link href="#portfolio" className="text-foreground hover:text-primary transition">
+            <Link href="/portfolio" className="text-foreground hover:text-primary transition">
               Portfolio
             </Link>
           </div>
@@ -45,10 +45,10 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden pb-4 space-y-2">
-            <Link href="#features" className="block px-4 py-2 text-foreground hover:text-primary">
+            <Link href="/tokenize" className="block px-4 py-2 text-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
               Tokenization
             </Link>
-            <Link href="#portfolio" className="block px-4 py-2 text-foreground hover:text-primary">
+            <Link href="/portfolio" className="block px-4 py-2 text-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
               Portfolio
             </Link>
             <button className="w-full mt-4 px-6 py-2 rounded-lg bg-primary text-primary-foreground font-medium">
