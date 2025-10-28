@@ -9,8 +9,12 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
-      <Features />
-      <CTA />
+      <div className="bg-black">
+        <Features />
+      </div>
+      <div className="bg-black">
+        <CTA />
+      </div>
       <Footer />
     </main>
   );

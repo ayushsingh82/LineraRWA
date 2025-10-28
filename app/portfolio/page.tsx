@@ -201,6 +201,125 @@ export default function PortfolioPage() {
           </div>
         )}
       </div>
+
+      {/* Buy RWA Modal */}
+      {showBuyModal && selectedAsset && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-card rounded-2xl border border-border max-w-xl w-full">
+            <div className="p-8">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-foreground">Purchase RWA Tokens</h2>
+                <button
+                  onClick={() => setShowBuyModal(false)}
+                  className="text-muted-foreground hover:text-foreground transition"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* Asset Info */}
+              <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/20">
+                <div className="flex items-start gap-4">
+                  <div className="text-4xl">{selectedAsset.image}</div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground">{selectedAsset.name}</h3>
+                    <p className="text-sm text-muted-foreground">{selectedAsset.location}</p>
+                  </div>
+                </div>
+                <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p className="text-muted-foreground">Asset Value</p>
+                    <p className="text-lg font-bold text-primary">${selectedAsset.value.toLocaleString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">Expected APY</p>
+                    <p className="text-lg font-bold text-green-500">{selectedAsset.apy}%</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Purchase Form */}
+              <div className="space-y-6">
+                {/* Wallet Address */}
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Your Wallet Address
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="0x..."
+                    value={walletAddress}
+                    onChange={(e) => setWalletAddress(e.target.value)}
+                    className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+
+                {/* Percentage Slider */}
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Ownership Percentage: <span className="text-primary font-bold">{buyPercentage}%</span>
+                  </label>
+                  <input
+                    type="range"
+                    min="0"
+                    max={(selectedAsset as any).availablePercentage || selectedAsset.percentage}
+                    value={buyPercentage}
+                    onChange={(e) => setBuyPercentage(parseInt(e.target.value))}
+                    className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+                    style={{
+                      background: `linear-gradient(to right, #fc6432 0%, #fc6432 ${(buyPercentage / ((selectedAsset as any).availablePercentage || selectedAsset.percentage)) * 100}%, var(--color-muted) ${(buyPercentage / ((selectedAsset as any).availablePercentage || selectedAsset.percentage)) * 100}%, var(--color-muted) 100%)`
+                    }}
+                  />
+                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                    <span>0%</span>
+                    <span>{((selectedAsset as any).availablePercentage || selectedAsset.percentage)}% max</span>
+                  </div>
+                </div>
+
+                {/* Purchase Summary */}
+                <div className="p-4 rounded-lg bg-muted/50 border border-border">
+                  <h4 className="text-sm font-semibold text-foreground mb-3">Purchase Summary</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Percentage</span>
+                      <span className="font-medium">{buyPercentage}%</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Purchase Amount</span>
+                      <span className="font-medium">${calculateTotalCost().toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Tokens</span>
+                      <span className="font-medium">{(calculateTotalCost() / selectedAsset.price).toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between pt-2 border-t border-border">
+                      <span className="font-semibold">Total</span>
+                      <span className="text-lg font-bold text-primary">${calculateTotalCost().toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-4 pt-4">
+                  <button
+                    onClick={() => setShowBuyModal(false)}
+                    className="flex-1 px-6 py-3 rounded-lg border border-border text-foreground font-medium hover:bg-muted transition"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleBuySubmit}
+                    disabled={buyPercentage === 0 || !walletAddress}
+                    className="flex-1 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Confirm Purchase
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

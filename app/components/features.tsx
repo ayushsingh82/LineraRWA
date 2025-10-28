@@ -25,7 +25,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-black">
+    <section id="features" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-black -mt-px">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">RWA Tokenization</h2>
