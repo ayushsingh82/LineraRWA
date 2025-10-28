@@ -1,7 +1,7 @@
+use super::{Asset, Message, Operation, Ownership, Request, Response, RWAApplication, RWAId, RWAState};
 use async_trait::async_trait;
 use linera_sdk::base::{Amount, ChainId, Owner};
 use linera_sdk::service::{ServiceContext, ViewStateContext};
-use crate::{Request, Response, RWAApplication, RWAId, RWAState};
 
 pub struct RWAService {
     state: RWAState,
