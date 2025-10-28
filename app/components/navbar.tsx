@@ -22,16 +22,10 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             <Link href="#features" className="text-foreground hover:text-primary transition">
-              Features
+              Tokenization
             </Link>
-            <Link href="#how-it-works" className="text-foreground hover:text-primary transition">
-              How It Works
-            </Link>
-            <Link href="#about" className="text-foreground hover:text-primary transition">
-              About
-            </Link>
-            <Link href="#contact" className="text-foreground hover:text-primary transition">
-              Contact
+            <Link href="#portfolio" className="text-foreground hover:text-primary transition">
+              Portfolio
             </Link>
           </div>
 
@@ -52,16 +46,10 @@ export default function Navbar() {
         {isOpen && (
           <div className="md:hidden pb-4 space-y-2">
             <Link href="#features" className="block px-4 py-2 text-foreground hover:text-primary">
-              Features
+              Tokenization
             </Link>
-            <Link href="#how-it-works" className="block px-4 py-2 text-foreground hover:text-primary">
-              How It Works
-            </Link>
-            <Link href="#about" className="block px-4 py-2 text-foreground hover:text-primary">
-              About
-            </Link>
-            <Link href="#contact" className="block px-4 py-2 text-foreground hover:text-primary">
-              Contact
+            <Link href="#portfolio" className="block px-4 py-2 text-foreground hover:text-primary">
+              Portfolio
             </Link>
             <button className="w-full mt-4 px-6 py-2 rounded-lg bg-primary text-primary-foreground font-medium">
               Connect Wallet

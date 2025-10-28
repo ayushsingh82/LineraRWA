@@ -3,23 +3,23 @@ import { Building2, TrendingUp, Lock, Zap } from "lucide-react"
 const features = [
   {
     icon: Building2,
-    title: "Tokenized Properties",
-    description: "Own fractions of premium real estate properties through blockchain-verified tokens.",
+    title: "RWA Tokenization",
+    description: "Convert real estate assets into blockchain tokens with transparent ownership.",
   },
   {
     icon: TrendingUp,
-    title: "Passive Income",
-    description: "Earn rental yields and appreciation directly to your wallet automatically.",
+    title: "Fractional Ownership",
+    description: "Buy and sell fractional tokens of premium properties with ease.",
   },
   {
     icon: Lock,
-    title: "Secure & Transparent",
-    description: "Smart contracts ensure transparency and security for all transactions.",
+    title: "Smart Contracts",
+    description: "Automated, secure transactions powered by Ethereum smart contracts.",
   },
   {
     icon: Zap,
-    title: "Instant Liquidity",
-    description: "Trade your property tokens on our decentralized marketplace anytime.",
+    title: "24/7 Trading",
+    description: "Trade RWA tokens instantly on our decentralized marketplace.",
   },
 ]
 
