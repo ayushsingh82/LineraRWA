@@ -1,14 +1,15 @@
 export default function Stats() {
     const stats = [
-      { label: "Total Assets", value: "$2.5B+" },
-      { label: "Active Investors", value: "50K+" },
-      { label: "Properties Listed", value: "500+" },
-      { label: "Avg. Yield", value: "8-12%" },
+      { label: "Tokenized Assets", value: "$2.5B+" },
+      { label: "RWA Holders", value: "50K+" },
+      { label: "Properties", value: "500+" },
+      { label: "Avg. APY", value: "8-12%" },
     ]
   
     return (
-      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-primary/5">
+      <section id="portfolio" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-primary/5">
         <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Portfolio Performance</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">

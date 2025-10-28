@@ -1,6 +1,9 @@
 import { ArrowRight } from "lucide-react"
+import LaserFlow from "./LaserFlow"
+import { useRef } from "react"
 
 export default function Hero() {
+  const laserContainerRef = useRef<HTMLDivElement>(null);
   return (
     <section className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background gradient */}
@@ -32,6 +35,18 @@ export default function Hero() {
               Learn More
             </button>
           </div>
+        </div>
+
+        {/* LaserFlow Background */}
+        <div 
+          ref={laserContainerRef}
+          className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden mb-12"
+        >
+          <LaserFlow
+            horizontalBeamOffset={0.1}
+            verticalBeamOffset={0.0}
+            color="#fc6432"
+          />
         </div>
 
         {/* Data Box Below */}
