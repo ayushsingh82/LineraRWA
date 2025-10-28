@@ -25,31 +25,38 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-card">
+    <section id="features" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-black">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">RWA Tokenization</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">RWA Tokenization</h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Transform real estate assets into tradeable blockchain tokens
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => {
-            const Icon = feature.icon
-            return (
-              <div
-                key={index}
-                className="p-6 rounded-xl bg-background border border-border hover:border-primary/50 transition"
-              >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <Icon className="text-primary" size={24} />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </div>
-            )
-          })}
+        {/* Vertical Box on Right */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 p-8 md:p-12 shadow-2xl">
+            <div className="space-y-4">
+              {features.map((feature, index) => {
+                const Icon = feature.icon
+                return (
+                  <div
+                    key={index}
+                    className="flex items-start gap-4 p-6 rounded-xl bg-black/50 border border-gray-800 hover:border-primary/30 transition-all hover:bg-primary/5"
+                  >
+                    <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Icon className="text-primary" size={28} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                      <p className="text-gray-400 text-sm">{feature.description}</p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>

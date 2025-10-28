@@ -42,7 +42,7 @@ export default function Hero() {
         {/* LaserFlow Background */}
         <div 
           ref={laserContainerRef}
-          className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden mb-12"
+          className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden mb-6"
         >
           <LaserFlow
             horizontalBeamOffset={0.1}
@@ -52,7 +52,7 @@ export default function Hero() {
         </div>
 
         {/* Data Box Below */}
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto -mt-28">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl blur-3xl" />
             <div className="relative bg-card rounded-2xl p-8 border border-border shadow-lg">

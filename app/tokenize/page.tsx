@@ -1,13 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowLeft, Building2, TrendingUp, PieChart } from "lucide-react"
-import Link from "next/link"
+import { Building2, TrendingUp, PieChart, Plus, X } from "lucide-react"
 
 export default function TokenizePage() {
   const [percentage, setPercentage] = useState(0)
   const [amount, setAmount] = useState(0)
   const [selectedAsset, setSelectedAsset] = useState<string | null>(null)
+  const [showModal, setShowModal] = useState(false)
+  const [addresses, setAddresses] = useState([{ address: "", percentage: 0 }])
+  const [tokenizePercentage, setTokenizePercentage] = useState(0)
 
   const assets = [
     { id: "1", name: "Manhattan Tower", value: 5000000, image: "🏢", location: "New York" },
@@ -18,8 +20,22 @@ export default function TokenizePage() {
 
   const handleTokenize = () => {
     if (!selectedAsset || percentage === 0) return
-    // Handle tokenization logic
-    console.log(`Tokenizing ${percentage}% of ${selectedAsset}`)
+    setShowModal(true)
+  }
+
+  const addAddress = () => {
+    setAddresses([...addresses, { address: "", percentage: 0 }])
+  }
+
+  const handleTokenizeSubmit = () => {
+    console.log("Tokenizing with addresses:", addresses)
+    setShowModal(false)
+  }
+
+  const updateAddress = (index: number, field: "address" | "percentage", value: string | number) => {
+    const newAddresses = [...addresses]
+    newAddresses[index] = { ...newAddresses[index], [field]: value }
+    setAddresses(newAddresses)
   }
 
   return (
@@ -27,10 +43,6 @@ export default function TokenizePage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition mb-4">
-            <ArrowLeft size={20} />
-            Back to Home
-          </Link>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Tokenize Your <span className="text-primary">RWA Assets</span>
           </h1>
@@ -155,6 +167,97 @@ export default function TokenizePage() {
           </div>
         </div>
       </div>
+
+      {/* Tokenization Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-card rounded-2xl border border-border max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-8">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-foreground">Configure Token Distribution</h2>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="text-muted-foreground hover:text-foreground transition"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div className="space-y-6">
+                {addresses.map((addr, index) => (
+                  <div key={index} className="p-6 rounded-xl bg-muted/50 border border-border">
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-foreground mb-2">
+                        Recipient Address {index + 1}
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="0x..."
+                        value={addr.address}
+                        onChange={(e) => updateAddress(index, "address", e.target.value)}
+                        className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-foreground mb-2">
+                        Percentage: <span className="text-primary font-bold">{addr.percentage}%</span>
+                      </label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={addr.percentage}
+                        onChange={(e) => updateAddress(index, "percentage", parseInt(e.target.value))}
+                        className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+                        style={{
+                          background: `linear-gradient(to right, #fc6432 0%, #fc6432 ${addr.percentage}%, var(--color-muted) ${addr.percentage}%, var(--color-muted) 100%)`
+                        }}
+                      />
+                      <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                        <span>0%</span>
+                        <span>100%</span>
+                      </div>
+                    </div>
+
+                    {addresses.length > 1 && (
+                      <button
+                        onClick={() => setAddresses(addresses.filter((_, i) => i !== index))}
+                        className="mt-3 px-3 py-1 rounded-lg text-sm bg-destructive/10 text-destructive hover:bg-destructive/20 transition"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                ))}
+
+                <button
+                  onClick={addAddress}
+                  className="w-full px-4 py-3 rounded-lg border border-primary text-primary font-medium hover:bg-primary/10 transition flex items-center justify-center gap-2"
+                >
+                  <Plus size={20} />
+                  Add Address
+                </button>
+
+                <div className="flex gap-4 pt-4">
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="flex-1 px-6 py-3 rounded-lg border border-border text-foreground font-medium hover:bg-muted transition"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleTokenizeSubmit}
+                    className="flex-1 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition"
+                  >
+                    Confirm Tokenization
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

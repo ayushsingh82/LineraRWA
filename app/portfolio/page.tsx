@@ -1,11 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowLeft, Wallet, TrendingUp, DollarSign, PieChart } from "lucide-react"
-import Link from "next/link"
+import { Wallet, TrendingUp, DollarSign, X } from "lucide-react"
 
 export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState<"owned" | "available">("owned")
+  const [showBuyModal, setShowBuyModal] = useState(false)
+  const [selectedAsset, setSelectedAsset] = useState<any>(null)
+  const [buyPercentage, setBuyPercentage] = useState(0)
+  const [walletAddress, setWalletAddress] = useState("")
 
   const myAssets = [
     { id: "1", name: "Manhattan Tower", percentage: 15, value: 750000, price: 0.01, image: "🏢", location: "New York", apy: 12 },
@@ -19,8 +22,26 @@ export default function PortfolioPage() {
     { id: "4", name: "Seattle Office Complex", availablePercentage: 30, value: 900000, price: 0.01, image: "🏙️", location: "Washington", apy: 9 },
   ]
 
-  const buyRWA = (assetId: string) => {
-    console.log(`Buying ${assetId}`)
+  const buyRWA = (asset: any) => {
+    setSelectedAsset(asset)
+    setShowBuyModal(true)
+    setBuyPercentage(0)
+    setWalletAddress("")
+  }
+
+  const handleBuySubmit = () => {
+    console.log("Buying RWA:", {
+      asset: selectedAsset,
+      percentage: buyPercentage,
+      wallet: walletAddress
+    })
+    setShowBuyModal(false)
+  }
+
+  const calculateTotalCost = () => {
+    if (!selectedAsset || buyPercentage === 0) return 0
+    const percentageValue = (buyPercentage / 100) * selectedAsset.value
+    return percentageValue
   }
 
   return (
@@ -28,10 +49,6 @@ export default function PortfolioPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition mb-4">
-            <ArrowLeft size={20} />
-            Back to Home
-          </Link>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             My <span className="text-primary">RWA Portfolio</span>
           </h1>
@@ -174,7 +191,7 @@ export default function PortfolioPage() {
                 </div>
 
                 <button
-                  onClick={() => buyRWA(asset.id)}
+                  onClick={() => buyRWA(asset)}
                   className="w-full px-4 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition"
                 >
                   Buy RWA
