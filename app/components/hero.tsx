@@ -16,7 +16,7 @@ export default function Hero() {
         <div className="text-center mb-12">
           <div className="inline-block mb-6">
             <span className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-              🏢 Real World Assets Tokenized
+              🏢 LineraRWA - Tokenized Real World Assets
             </span>
           </div>
 
@@ -25,7 +25,7 @@ export default function Hero() {
           </h1>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
-            RWA brings institutional-grade real estate investments to everyone. Own fractionalized building tokens,
+            LineraRWA brings institutional-grade real estate investments to everyone. Own fractionalized building tokens,
             earn passive income, and trade on our decentralized marketplace.
           </p>
 

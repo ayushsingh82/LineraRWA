@@ -49,7 +49,7 @@ export function WalletSelectModal({ open, onOpenChange, onSelectWallet }: Wallet
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-foreground">Connect Wallet</DialogTitle>
           <DialogDescription className="text-muted-foreground">
-            Choose your preferred wallet to connect to RWA Tokenization
+            Choose your preferred wallet to connect to LineraRWA
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-3 py-4">

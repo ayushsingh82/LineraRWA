@@ -50,7 +50,7 @@ export default function PortfolioPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            My <span className="text-primary">RWA Portfolio</span>
+            My <span className="text-primary">LineraRWA Portfolio</span>
           </h1>
           <p className="text-lg text-muted-foreground">
             Manage your tokenized real estate assets and earnings

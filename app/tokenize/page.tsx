@@ -44,7 +44,7 @@ export default function TokenizePage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Tokenize Your <span className="text-primary">RWA Assets</span>
+            Tokenize Your <span className="text-primary">LineraRWA Assets</span>
           </h1>
           <p className="text-lg text-muted-foreground">
             Convert your real estate assets into blockchain tokens and offer fractional ownership

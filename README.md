@@ -1,4 +1,4 @@
-# RWA Tokenization Platform
+# LineraRWA
 
 A Real World Asset (RWA) tokenization platform built on Linera chain with percentage-based fractional ownership.
 
@@ -9,6 +9,8 @@ A Real World Asset (RWA) tokenization platform built on Linera chain with percen
 - ✅ **Smart Contracts** - Linera-based contracts for secure tokenization
 - ✅ **Web3 Integration** - MetaMask, Coinbase, Linera wallet support
 - ✅ **Real-time Trading** - Instant P2P transactions
+- ✅ **Rental Income Streaming** - Automated micro-payments for rental yields
+- ✅ **Cross-Chain Syndication** - Combine assets across multiple Linera chains
 - ✅ **Dark Theme UI** - Modern orange-themed interface
 
 ## 🚀 Quick Start
@@ -112,6 +114,27 @@ npm run build
 ### Linera Contracts
 See `contracts/DEPLOYMENT.md` for detailed deployment instructions.
 
+## 💰 Use Cases
+
+### For Property Owners
+- Tokenize properties for liquidity
+- Retain partial ownership while accessing funds
+- Sell fractional shares to investors
+- Distribute rental income automatically
+
+### For Investors
+- Invest in premium real estate with small amounts
+- Diversify across multiple properties and chains
+- Earn passive rental income
+- Trade tokens instantly on marketplace
+- Benefit from property appreciation
+
+### For Portfolio Managers
+- Manage multiple properties across chains
+- Aggregate rental income streams
+- Track performance metrics
+- Execute complex investment strategies
+
 ## 📚 Documentation
 
 - [Linera Docs](https://linera.io/docs)
@@ -133,12 +156,35 @@ See `contracts/DEPLOYMENT.md` for detailed deployment instructions.
 - Buy/sell fractional shares instantly
 - Real-time price updates
 
-## 🔐 Security
+### Rental Income Streaming
+- **Automated micro-payments** - Receive rental income proportionally based on your ownership
+- **Real-time distribution** - Income streams directly to your wallet
+- **Transparent tracking** - See exact income per property
+- **Multi-asset aggregation** - Combine income from multiple properties
 
-- Ownership validation (prevents >100%)
-- State isolation per asset
-- Cross-chain message validation
-- Smart contract-based transfers
+### Cross-Chain Property Syndication
+- **Combine assets** across multiple Linera microchains
+- **Diversified portfolios** - Spread investments across different chains
+- **Unified management** - View all assets from one dashboard
+- **Chain-agnostic trading** - Trade tokens regardless of origin chain
+
+## 💡 Innovation Highlights
+
+Built on Linera's microchain architecture for:
+- **Lightning-fast transactions** - Sub-second finality
+- **Cross-chain messaging** - Seamless communication between chains
+- **Scalable infrastructure** - Handle thousands of properties
+- **Privacy-preserving** - User data isolation per microchain
+- **Cost-efficient** - Low gas fees for fractional ownership transfers
+
+## 🔐 Security Features
+
+- **Ownership Validation** - Prevents total ownership >100%
+- **State Isolation** - Each asset's state independently managed
+- **Cross-chain Security** - Message validation between chains
+- **Smart Contract Enforcement** - All transfers verified on-chain
+- **Percentage Tracking** - Accurate fractional ownership management
+- **Price Oracle Integration** - Real-time, verified property valuations
 
 ## 🤝 Contributing
 

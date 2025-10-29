@@ -10,7 +10,7 @@ export default function Footer() {
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold">R</span>
             </div>
-            <span className="text-xl font-bold text-foreground">RWA Tokenization Platform</span>
+            <span className="text-xl font-bold text-foreground">LineraRWA</span>
           </div>
 
           <div className="flex gap-6">
@@ -27,7 +27,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border/20 mt-6 pt-4 text-center">
-          <p className="text-sm text-muted-foreground">© 2025 RWA Tokenization. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">© 2025 LineraRWA. All rights reserved.</p>
         </div>
       </div>
     </footer>

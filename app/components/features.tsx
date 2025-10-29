@@ -1,4 +1,4 @@
-import { Building2, TrendingUp, Lock, Zap } from "lucide-react"
+import { Building2, TrendingUp, Lock, Zap, DollarSign, Link2 } from "lucide-react"
 
 const features = [
   {
@@ -12,9 +12,19 @@ const features = [
     description: "Buy and sell fractional tokens of premium properties with ease.",
   },
   {
+    icon: DollarSign,
+    title: "Rental Income Streaming",
+    description: "Automated micro-payments for rental yields distributed proportionally to owners.",
+  },
+  {
+    icon: Link2,
+    title: "Cross-Chain Syndication",
+    description: "Combine assets across multiple Linera microchains for diversified portfolios.",
+  },
+  {
     icon: Lock,
     title: "Smart Contracts",
-    description: "Automated, secure transactions powered by Ethereum smart contracts.",
+    description: "Automated, secure transactions powered by Linera microchains.",
   },
   {
     icon: Zap,
@@ -28,7 +38,7 @@ export default function Features() {
     <section id="features" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-black -mt-px">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">RWA Tokenization</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">LineraRWA Tokenization</h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Transform real estate assets into tradeable blockchain tokens
           </p>

@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RWA Tokenization Platform | Real World Assets on Blockchain",
-  description: "Tokenize real estate assets and invest in fractional property ownership through blockchain technology",
+  title: "LineraRWA | Real World Assets on Linera Blockchain",
+  description: "Tokenize real estate assets and invest in fractional property ownership through Linera microchains",
 };
 
 export default function RootLayout({
