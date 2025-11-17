@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Menu, X, Wallet, LogOut } from "lucide-react"
 import { useWallet } from "../../lib/wallet-context"
 import { WalletSelectModal } from "../../components/wallet-select-modal"
+import Notifications from "../../components/notifications"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -42,6 +43,15 @@ export default function Navbar() {
             </Link>
             <Link href="/portfolio" className="text-foreground hover:text-primary transition">
               Portfolio
+            </Link>
+            <Link href="/marketplace" className="text-foreground hover:text-primary transition">
+              Marketplace
+            </Link>
+            <Link href="/analytics" className="text-foreground hover:text-primary transition">
+              Analytics
+            </Link>
+            <Link href="/governance" className="text-foreground hover:text-primary transition">
+              Governance
             </Link>
           </div>
 
