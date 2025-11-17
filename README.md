@@ -12,6 +12,10 @@ A Real World Asset (RWA) tokenization platform built on Linera chain with percen
 - ✅ **Rental Income Streaming** - Automated micro-payments for rental yields
 - ✅ **Cross-Chain Syndication** - Combine assets across multiple Linera chains
 - ✅ **Dark Theme UI** - Modern orange-themed interface
+- ✅ **Advanced Analytics** - Portfolio performance metrics, risk analysis, and income history
+- ✅ **Marketplace** - Order book, limit orders, and trading history
+- ✅ **Governance** - Decentralized voting on asset management decisions
+- ✅ **Real-time Notifications** - Income alerts, trade notifications, and price updates
 
 ## 🚀 Quick Start
 
@@ -83,6 +87,9 @@ my-app/
 - `/` - Landing page with hero, features, CTA
 - `/tokenize` - Tokenize your RWA assets
 - `/portfolio` - View and manage your portfolio
+- `/marketplace` - Trade RWA tokens with order book and limit orders
+- `/analytics` - Advanced portfolio analytics, performance metrics, and risk analysis
+- `/governance` - Participate in asset management decisions through voting
 
 ## 🛠️ Tech Stack
 
@@ -185,6 +192,8 @@ Built on Linera's microchain architecture for:
 - **Smart Contract Enforcement** - All transfers verified on-chain
 - **Percentage Tracking** - Accurate fractional ownership management
 - **Price Oracle Integration** - Real-time, verified property valuations
+
+
 
 ## 🤝 Contributing
 

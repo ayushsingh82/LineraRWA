@@ -3,10 +3,37 @@
 import { useState } from "react"
 import { Vote, CheckCircle, XCircle, Clock, Users, TrendingUp, Building2 } from "lucide-react"
 
+type ActiveProposal = {
+  id: string
+  title: string
+  asset: string
+  description: string
+  type: string
+  votesFor: number
+  votesAgainst: number
+  totalVotes: number
+  deadline: Date
+  quorum: number
+  status: string
+}
+
+type PastProposal = {
+  id: string
+  title: string
+  asset: string
+  description: string
+  type: string
+  votesFor: number
+  votesAgainst: number
+  totalVotes: number
+  result: string
+  endedAt: Date
+}
+
 export default function GovernancePage() {
   const [activeTab, setActiveTab] = useState<"active" | "past">("active")
 
-  const activeProposals = [
+  const activeProposals: ActiveProposal[] = [
     {
       id: "1",
       title: "Property Management Contract Renewal",
@@ -48,7 +75,7 @@ export default function GovernancePage() {
     },
   ]
 
-  const pastProposals = [
+  const pastProposals: PastProposal[] = [
     {
       id: "4",
       title: "New Tenant Approval",
@@ -148,7 +175,12 @@ export default function GovernancePage() {
 
         {/* Proposals */}
         <div className="space-y-6">
-          {(activeTab === "active" ? activeProposals : pastProposals).map((proposal) => (
+          {(activeTab === "active" ? activeProposals : pastProposals).map((proposal) => {
+            const isActive = activeTab === "active"
+            const activeProposal = isActive ? (proposal as ActiveProposal) : null
+            const pastProposal = !isActive ? (proposal as PastProposal) : null
+            
+            return (
             <div
               key={proposal.id}
               className="p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition"
@@ -228,28 +260,28 @@ export default function GovernancePage() {
               {/* Footer */}
               <div className="flex items-center justify-between pt-4 border-t border-border">
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  {activeTab === "active" ? (
+                  {isActive && activeProposal ? (
                     <>
                       <div className="flex items-center gap-1">
                         <Clock size={14} />
-                        <span>{formatTimeRemaining(proposal.deadline)}</span>
+                        <span>{formatTimeRemaining(activeProposal.deadline)}</span>
                       </div>
-                      <span>Quorum: {proposal.quorum}%</span>
+                      <span>Quorum: {activeProposal.quorum}%</span>
                     </>
-                  ) : (
+                  ) : pastProposal ? (
                     <div className="flex items-center gap-2">
-                      {proposal.result === "passed" ? (
+                      {pastProposal.result === "passed" ? (
                         <CheckCircle className="text-green-500" size={16} />
                       ) : (
                         <XCircle className="text-red-500" size={16} />
                       )}
-                      <span className={proposal.result === "passed" ? "text-green-500" : "text-red-500"}>
-                        {proposal.result.toUpperCase()}
+                      <span className={pastProposal.result === "passed" ? "text-green-500" : "text-red-500"}>
+                        {pastProposal.result.toUpperCase()}
                       </span>
                     </div>
-                  )}
+                  ) : null}
                 </div>
-                {activeTab === "active" && (
+                {isActive && activeProposal && (
                   <div className="flex gap-2">
                     <button className="px-4 py-2 rounded-lg bg-green-500/10 text-green-500 font-medium hover:bg-green-500/20 transition">
                       Vote For
@@ -261,7 +293,8 @@ export default function GovernancePage() {
                 )}
               </div>
             </div>
-          ))}
+          )
+          })}
         </div>
       </div>
     </div>
