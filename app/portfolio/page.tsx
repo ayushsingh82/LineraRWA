@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Wallet, TrendingUp, DollarSign, X } from "lucide-react"
+import Link from "next/link"
+import { Wallet, TrendingUp, DollarSign, X, BarChart3, Vote } from "lucide-react"
 
 export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState<"owned" | "available">("owned")
@@ -49,12 +50,32 @@ export default function PortfolioPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            My <span className="text-primary">LineraRWA Portfolio</span>
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Manage your tokenized real estate assets and earnings
-          </p>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                My <span className="text-primary">LineraRWA Portfolio</span>
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                Manage your tokenized real estate assets and earnings
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <Link
+                href="/analytics"
+                className="px-4 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 font-medium hover:bg-primary/20 transition flex items-center gap-2"
+              >
+                <BarChart3 size={18} />
+                Analytics
+              </Link>
+              <Link
+                href="/governance"
+                className="px-4 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 font-medium hover:bg-primary/20 transition flex items-center gap-2"
+              >
+                <Vote size={18} />
+                Governance
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Tabs */}

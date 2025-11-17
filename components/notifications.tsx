@@ -188,7 +188,7 @@ export default function Notifications() {
                                   e.stopPropagation()
                                   deleteNotification(notification.id)
                                 }}
-                                className="p-1 rounded hover:bg-muted transition opacity-0 group-hover:opacity-100"
+                                className="p-1 rounded hover:bg-muted transition"
                               >
                                 <X size={14} className="text-muted-foreground" />
                               </button>

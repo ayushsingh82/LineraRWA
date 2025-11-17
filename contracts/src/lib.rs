@@ -115,11 +115,35 @@ pub enum Request {
 }
 
 #[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
+pub struct IncomeRecord {
+    pub asset_id: RWAId,
+    pub owner: Owner,
+    pub amount: Amount,
+    pub timestamp: u64,
+}
+
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
+pub struct Proposal {
+    pub id: u64,
+    pub asset_id: RWAId,
+    pub title: String,
+    pub description: String,
+    pub proposal_type: String,
+    pub votes_for: u64,
+    pub votes_against: u64,
+    pub deadline: u64,
+    pub status: String,
+}
+
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
 pub enum Response {
     Balance(Amount),
     Asset(Asset),
     Assets(Vec<Asset>),
     Ownership(Vec<Ownership>),
+    IncomeHistory(Vec<IncomeRecord>),
+    Proposals(Vec<Proposal>),
+    Proposal(Proposal),
     Error(String),
 }
 

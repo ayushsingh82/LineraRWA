@@ -1,5 +1,6 @@
-use super::{Asset, Ownership, RWAId};
+use super::{Asset, IncomeRecord, Ownership, Proposal, RWAId};
 use linera_sdk::base::{Amount, Owner};
+use std::time::{SystemTime, UNIX_EPOCH};
 
 #[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct RWAState {
@@ -7,6 +8,10 @@ pub struct RWAState {
     pub ownerships: Vec<Ownership>,
     pub next_asset_id: u64,
     pub balances: std::collections::HashMap<Owner, Amount>,
+    pub income_history: Vec<IncomeRecord>,
+    pub proposals: std::collections::HashMap<u64, Proposal>,
+    pub votes: std::collections::HashMap<(u64, Owner), bool>, // (proposal_id, owner) -> vote_for
+    pub next_proposal_id: u64,
 }
 
 impl RWAState {
@@ -16,6 +21,10 @@ impl RWAState {
             ownerships: Vec::new(),
             next_asset_id: 1,
             balances: std::collections::HashMap::new(),
+            income_history: Vec::new(),
+            proposals: std::collections::HashMap::new(),
+            votes: std::collections::HashMap::new(),
+            next_proposal_id: 1,
         }
     }
 
@@ -130,6 +139,145 @@ impl RWAState {
             .filter(|o| o.owner == owner)
             .cloned()
             .collect()
+    }
+
+    pub fn distribute_rental_income(
+        &mut self,
+        asset_id: RWAId,
+        total_amount: Amount,
+    ) -> Result<Vec<(Owner, Amount)>, String> {
+        let asset = self.assets.get(&asset_id)
+            .ok_or("Asset not found")?;
+
+        // Get all owners of this asset
+        let owners: Vec<(Owner, u64)> = self.ownerships
+            .iter()
+            .filter(|o| o.asset_id == asset_id)
+            .map(|o| (o.owner, o.percentage))
+            .collect();
+
+        let total_percentage: u64 = owners.iter().map(|(_, p)| p).sum();
+        if total_percentage == 0 {
+            return Err("No owners found".to_string());
+        }
+
+        let mut distributions = Vec::new();
+        let timestamp = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs();
+
+        for (owner, percentage) in owners {
+            let owner_amount = Amount(
+                (total_amount.0 as f64 * percentage as f64 / total_percentage as f64) as u64
+            );
+            
+            // Update balance
+            *self.balances.entry(owner).or_insert(Amount(0)) += owner_amount;
+
+            // Record income history
+            self.income_history.push(IncomeRecord {
+                asset_id,
+                owner,
+                amount: owner_amount,
+                timestamp,
+            });
+
+            distributions.push((owner, owner_amount));
+        }
+
+        Ok(distributions)
+    }
+
+    pub fn create_proposal(
+        &mut self,
+        asset_id: RWAId,
+        proposal_id: u64,
+        title: String,
+        description: String,
+        proposal_type: String,
+    ) -> Result<(), String> {
+        if self.proposals.contains_key(&proposal_id) {
+            return Err("Proposal already exists".to_string());
+        }
+
+        let deadline = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs() + (7 * 24 * 60 * 60); // 7 days from now
+
+        let proposal = Proposal {
+            id: proposal_id,
+            asset_id,
+            title,
+            description,
+            proposal_type,
+            votes_for: 0,
+            votes_against: 0,
+            deadline,
+            status: "active".to_string(),
+        };
+
+        self.proposals.insert(proposal_id, proposal);
+        self.next_proposal_id = proposal_id + 1;
+        Ok(())
+    }
+
+    pub fn vote(
+        &mut self,
+        proposal_id: u64,
+        voter: Owner,
+        vote_for: bool,
+        voting_power: u64,
+    ) -> Result<(), String> {
+        let proposal = self.proposals.get_mut(&proposal_id)
+            .ok_or("Proposal not found")?;
+
+        // Check if already voted
+        if self.votes.contains_key(&(proposal_id, voter)) {
+            return Err("Already voted".to_string());
+        }
+
+        // Check deadline
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs();
+        if now > proposal.deadline {
+            return Err("Proposal deadline passed".to_string());
+        }
+
+        // Record vote
+        self.votes.insert((proposal_id, voter), vote_for);
+
+        // Update vote counts
+        if vote_for {
+            proposal.votes_for += voting_power;
+        } else {
+            proposal.votes_against += voting_power;
+        }
+
+        Ok(())
+    }
+
+    pub fn get_income_history(&self, asset_id: RWAId, owner: Owner) -> Vec<IncomeRecord> {
+        self.income_history
+            .iter()
+            .filter(|r| r.asset_id == asset_id && r.owner == owner)
+            .cloned()
+            .collect()
+    }
+
+    pub fn get_proposals(&self, asset_id: RWAId) -> Vec<Proposal> {
+        self.proposals
+            .values()
+            .filter(|p| p.asset_id == asset_id)
+            .cloned()
+            .collect()
+    }
+
+    pub fn get_proposal(&self, proposal_id: u64) -> Option<&Proposal> {
+        self.proposals.get(&proposal_id)
     }
 }
 
