@@ -57,6 +57,7 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-4">
+            {isConnected && <Notifications />}
             {isConnected ? (
               <div className="flex items-center gap-3">
                 <span className="text-sm text-muted-foreground">{balance} ETH</span>
@@ -95,6 +96,20 @@ export default function Navbar() {
             <Link href="/portfolio" className="block px-4 py-2 text-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
               Portfolio
             </Link>
+            <Link href="/marketplace" className="block px-4 py-2 text-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
+              Marketplace
+            </Link>
+            <Link href="/analytics" className="block px-4 py-2 text-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
+              Analytics
+            </Link>
+            <Link href="/governance" className="block px-4 py-2 text-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
+              Governance
+            </Link>
+            {isConnected && (
+              <div className="px-4 py-2">
+                <Notifications />
+              </div>
+            )}
             <button 
               onClick={handleConnect}
               className="w-full mt-4 px-6 py-2 rounded-lg bg-primary text-primary-foreground font-medium flex items-center justify-center gap-2"

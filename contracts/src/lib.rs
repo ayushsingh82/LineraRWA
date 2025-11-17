@@ -63,6 +63,22 @@ pub enum Operation {
         asset_id: RWAId,
         amount: Amount,
     },
+    DistributeRentalIncome {
+        asset_id: RWAId,
+        total_amount: Amount,
+    },
+    CreateProposal {
+        asset_id: RWAId,
+        proposal_id: u64,
+        title: String,
+        description: String,
+        proposal_type: String,
+    },
+    Vote {
+        proposal_id: u64,
+        vote_for: bool,
+        voting_power: u64,
+    },
 }
 
 #[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
@@ -70,6 +86,20 @@ pub enum Message {
     AssetCreated {
         asset_id: RWAId,
         name: String,
+    },
+    IncomeDistributed {
+        asset_id: RWAId,
+        owner: Owner,
+        amount: Amount,
+    },
+    ProposalCreated {
+        proposal_id: u64,
+        asset_id: RWAId,
+    },
+    VoteCast {
+        proposal_id: u64,
+        voter: Owner,
+        vote_for: bool,
     },
 }
 
@@ -79,6 +109,9 @@ pub enum Request {
     GetAsset { asset_id: RWAId },
     ListAssets,
     GetOwnership { owner: Owner },
+    GetIncomeHistory { asset_id: RWAId, owner: Owner },
+    GetProposals { asset_id: RWAId },
+    GetProposal { proposal_id: u64 },
 }
 
 #[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
